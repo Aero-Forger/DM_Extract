@@ -8,12 +8,14 @@
 
 ### USAGE
 
+```bash
 chmod +x dm_extract
  ./dm_extract photo.jpg
  ./dm_extract -o report.csv flight/*.JPG
  ./dm_extract --geojson flight/*.JPG > flight.geojson
  ./dm_extract --raw DJI_0001.JPG
  ./dm_extract --help
+```
 
 ### OUTPUTS
 
