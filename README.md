@@ -35,6 +35,10 @@ See binaries documents for more details
 - Pre-process image sets before photogrammetry pipelines (Metashape, ODM...)
 - Quality-check GPS coverage before processing
 
+## Supported drones:
+
+https://github.com/Aero-Forger/DM_Extract/blob/main/SUPPORTED_DRONES.md
+
 ---
 
 ## Part of the Aeroforger ecosystem
