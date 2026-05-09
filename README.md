@@ -24,6 +24,7 @@
 ```bash
 dm_extract image.jpg
 ```
+See binaries documents for more details
 
 ---
 
