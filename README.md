@@ -1,4 +1,4 @@
-# dm_extract
+# dm_extract ( *drone metadata extract* )
 
 > Extract drone image metadata from the command line.
 
