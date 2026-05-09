@@ -24,7 +24,7 @@
 ```bash
 dm_extract image.jpg
 ```
-See binaries documents for more details
+See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) for more details
 
 ---
 
