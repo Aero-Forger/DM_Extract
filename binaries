@@ -1,12 +1,12 @@
-#dm_extract — Drone Metadata Extractor
+**dm_extract — Drone Metadata Extractor**
 
-### Platform : 
+**Platform :** 
           - Linux x86-64 (static binary, no dependencies)
             Tested on: Ubuntu 22.04 / 24.04, Debian 12
           - Windows 10 and 11
           - Mac: on-going bug corrections - pending
 
-### USAGE
+**USAGE**
 
 chmod +x dm_extract
  ./dm_extract photo.jpg
@@ -15,16 +15,16 @@ chmod +x dm_extract
  ./dm_extract --raw DJI_0001.JPG
  ./dm_extract --help
 
-### OUTPUTS
+**OUTPUTS**
 
 CSV (default) : 33 columns — GPS, orientation, calibration, LRF, RTK
  GeoJSON : FeatureCollection, one Feature per GPS‑valid image
 
-### SUPPORTED BRANDS
+**SUPPORTED BRANDS**
 
 DJI · Parrot · senseFly · Skydio · Autel · Yuneec · Xiaomi/FIMI
 
-### EXIT CODES
+**EXIT CODES**
 
 0 Success
  1 At least one file in error
