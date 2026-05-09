@@ -2,18 +2,19 @@
 
 > Extract drone image metadata from the command line.
 
-`dm_extract` is a CLI tool for extracting EXIF, XMP and GPS metadata from drone JPG images. It produces structured, ready-to-use output in multiple formats — designed for integration into geomatics and photogrammetry workflows.
+`dm_extract` is a CLI tool for extracting EXIF, XMP and GPS metadata from drone JPG images.  
+It produces structured, ready-to-use output in multiple formats — designed for integration into geomatics and photogrammetry workflows.
 
 ---
 
 ## Features
 
-- 📷 Parses EXIF / XMP metadata from drone JPG images (single file or batch)
-- 📍 Extracts GPS coordinates and altitude
-- 📤 Exports to multiple formats: **JSON**, **CSV**, **GeoJSON**
-- ⚡ Fast, scriptable, pipeline-friendly
-- 100% written in C
-- Ported for Windows, Linux and Mac OsX
+* 📷 Parses EXIF / XMP metadata from drone JPEG images (single file or batch)
+* 📍 Extracts GPS coordinates, altitude, gimbal angles and calibrated focal length
+* 📤 Exports to CSV and GeoJSON
+* ⚡ Fast, scriptable, pipeline-friendly
+* 100% written in C
+* Runs on Windows, Linux and macOS
 
 ---
 
