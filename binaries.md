@@ -2,7 +2,7 @@
 
 ### Platform : 
           - Linux x86-64 (static binary, no dependencies)
-            Tested on: Ubuntu 22.04 / 24.04, Debian 12 and Fedora
+            Tested on: Ubuntu 22.04 / 24.04, Debian 12 and Fedora 43/44
           - Windows 10 and 11
           - Mac: on-going bug corrections - pending
 
