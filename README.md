@@ -37,7 +37,7 @@ See binaries documents for more details
 
 ## Supported drones:
 
-https://github.com/Aero-Forger/DM_Extract/blob/main/SUPPORTED_DRONES.md
+[Drones](https://github.com/Aero-Forger/DM_Extract/blob/main/SUPPORTED_DRONES.md)
 
 ---
 
