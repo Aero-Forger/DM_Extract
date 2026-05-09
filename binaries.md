@@ -28,6 +28,6 @@ DJI · Parrot · senseFly · Skydio · Autel · Yuneec · Xiaomi/FIMI
 
 ### EXIT CODES
 
-0 Success
- 1 At least one file in error
- 2 Argument error
+0 Success  
+1 At least one file in error  
+2 Argument error  
