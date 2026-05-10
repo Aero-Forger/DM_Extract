@@ -1,5 +1,5 @@
-Here a sample of a short flight.
-Output CSV
+Here a sample of a short flight.  
+**Output CSV**
 
 50 images processeds en 0.48 s  (103.7 img/s)
 
