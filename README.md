@@ -1,4 +1,5 @@
 # dm_extract ( *drone metadata extract* )
+![Langage](https://img.shields.io/badge/langage-C-blue.svg)
 
 > Extract drone image metadata from the command line.
 
