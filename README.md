@@ -88,7 +88,7 @@ See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) 
 
 ## Part of the Aeroforger ecosystem
 
-`dm_extract` is an open-source tool maintained under the [Aeroforger](https://github.com/Aeroforger) project — a collection of tools for drone data processing, photogrammetry and geomatics.
+`dm_extract` is an open-source tool maintained under the [Aeroforger](https://github.com/Aero-Forger) project — a collection of tools for drone data processing, photogrammetry and geomatics.
 
 Support the project on [Patreon](https://www.patreon.com/Aeroforger).
 
