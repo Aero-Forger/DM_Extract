@@ -24,10 +24,6 @@ chmod +x dm_extract
 CSV (default) : 33 columns — GPS, orientation, calibration, LRF, RTK
  GeoJSON : FeatureCollection, one Feature per GPS‑valid image
 
-### SUPPORTED BRANDS
-
-DJI · Parrot · senseFly · Skydio · Autel · Yuneec · Xiaomi/FIMI
-
 ### EXIT CODES
 
 0 Success  
