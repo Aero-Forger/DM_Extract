@@ -15,6 +15,7 @@ It produces structured, ready-to-use output in multiple formats — designed for
 * ⚡ Fast, scriptable, pipeline-friendly
 * 100% written in C
 * Runs on Windows, Linux and macOS
+* Bonus: Python GUI tool 
 
 ---
 
