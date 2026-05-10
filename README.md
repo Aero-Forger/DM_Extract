@@ -43,7 +43,7 @@ At least one file must be provided. Wildcards are accepted.
 ------
 ###  Exit codes
 
-/ Code / Meaning |
+| Code |                             Meaning                          |
 | ---- | ------------------------------------------------------------ |
 |  '0` | Success — all files have been processed                      |
 |  `1` | At least one file in error (read, format not recognized)     |
