@@ -62,6 +62,14 @@ dm_extract.exe DJI_0001.JPG
 ```
 See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) for more details
 
+#### Test Python GUI
+
+[GUI](https://github.com/Aero-Forger/DM_Extract/blob/main/dm_extract_gui_en.py)
+
+Quick python tool to graphically test dm_extract.
+The static binary use is preferred to be able to make scripts or to be integrate into an exernal workflow. 
+The GUI does not allow it.
+
 
 ### Limitations
 
