@@ -61,6 +61,14 @@ dm_extract.exe DJI_0001.JPG
 ```
 See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) for more details
 
+
+### Limitations
+
+- Only **JPEG** files (`.jpg`, `.JPG`) are supported. RAW formats (DNG, CR2, NEF) are not yet supported.
+- The maximum scan size per file is **512 KB** (the EXIF + XMP blocks of a drone fit in the first 128 KB).
+- The processing is **sequential** (one file at a time) — no multi-threaded parallelism yet.
+- In GeoJSON mode, images without valid GPS are excluded without warning message (use '--raw` to diagnose).
+  
 ---
 
 ## Use cases
@@ -71,6 +79,8 @@ See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) 
 - Quality-check GPS coverage before processing
 
 ## Supported drones:
+
+7 brands detected automatically: **DJI**, **Parrot**, **senseFly**, **Skydio**, **Autel Robotics**, **Yuneec**, **Xiaomi/FIMI**.
 
 [Drones](https://github.com/Aero-Forger/DM_Extract/blob/main/SUPPORTED_DRONES.md)
 
