@@ -21,7 +21,7 @@ It produces structured, ready-to-use output in multiple formats — designed for
 
 ## Usage
 
-### Syntaxe
+##### Syntaxe
 
 ```bash
 dm_extract [options] FILE [FILE ...]
@@ -29,7 +29,7 @@ dm_extract [options] FILE [FILE ...]
 
 At least one file must be provided. Wildcards are accepted.
 
-## Options
+##### Options
 
 | Option    | Forme longue    | Description                                               |
 | --------- | --------------- | --------------------------------------------------------- |
@@ -41,8 +41,7 @@ At least one file must be provided. Wildcards are accepted.
 | `-V`      | `--version`     | Show version and exit                                     |
 | `-h`      | `--help`        | Show help and exit                                        |
 
-------
-###  Exit codes
+#####  Exit codes
 
 | Code |                             Meaning                          |
 | ---- | ------------------------------------------------------------ |
@@ -50,8 +49,7 @@ At least one file must be provided. Wildcards are accepted.
 |  `1` | At least one file in error (read, format not recognized)     |
 |  '2` | Arguments error (unknown option, inaccessible output file)   |
 
-
-### Single file
+##### Single file
 
 ```bash
 # Linux / macOS
@@ -62,6 +60,8 @@ dm_extract.exe DJI_0001.JPG
 ```
 See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) for more details
 
+---
+
 ### Test Python GUI
 
 [GUI](https://github.com/Aero-Forger/DM_Extract/blob/main/dm_extract_gui_en.py)
@@ -70,7 +70,12 @@ Quick python tool to graphically test dm_extract.
 The static binary use is preferred to be able to make scripts or to be integrate into an exernal workflow.   
 The GUI does not allow it.
 
+---
+### Output:
 
+[output CSV](https://github.com/Aero-Forger/DM_Extract/blob/main/CSV_sample.md)
+
+---
 ### Limitations
 
 - Only **JPEG** files (`.jpg`, `.JPG`) are supported. RAW formats (DNG, CR2, NEF) are not yet supported.
