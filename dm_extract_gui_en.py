@@ -30,16 +30,16 @@ class App:
 
         self.bin_var   = tk.StringVar()
         self.dir_var   = tk.StringVar()
-        self.csv_var   = tk.StringVar()   # output CSV path
-        self.geo_var   = tk.StringVar()   # output GeoJSON path — SEPARATE
-        self.disp_var  = tk.StringVar()   # variable displayed in the Entry
+        self.csv_var   = tk.StringVar()   # chemin sortie CSV
+        self.geo_var   = tk.StringVar()   # chemin sortie GeoJSON — SÉPARÉ
+        self.disp_var  = tk.StringVar()   # variable affichée dans l'Entry
         self.noheader  = tk.BooleanVar()
         self.quiet     = tk.BooleanVar()
         self.save_file = tk.BooleanVar()
         self._mode     = "csv"
         self._running  = False
-        self._start_t  = 0.0    # processing start timestamp
-        self._n_images = 0      # number of images in current command
+        self._start_t  = 0.0    # timestamp début de traitement
+        self._n_images = 0      # nombre d'images de la commande courante
         self._q        = queue.Queue()
 
         self._auto_detect()
@@ -73,7 +73,7 @@ class App:
         tk.Label(h, text="dm_extract  GUI", bg=C["accent2"],
                  fg="#FFF", font=("",12,"bold")).pack(anchor="w")
 
-        # Binary
+        # Binaire
         self._lbl(left,"dm_extract binary")
         r = tk.Frame(left, bg=C["panel"]); r.pack(fill=tk.X, pady=3)
         tk.Entry(r, textvariable=self.bin_var, bg=C["card"], fg=C["text"],
@@ -86,7 +86,7 @@ class App:
         self.lbl_bin.pack(fill=tk.X)
         self._div(left)
 
-        # Directory
+        # Répertoire
         self._lbl(left,"Image directory")
         r2 = tk.Frame(left, bg=C["panel"]); r2.pack(fill=tk.X, pady=3)
         tk.Entry(r2, textvariable=self.dir_var, bg=C["card"], fg=C["text"],
@@ -102,8 +102,8 @@ class App:
         # Commands
         self._lbl(left,"Commands")
         for txt, bg, fn in [
-            ("Extract  →  CSV",     C["btn_csv"],  self._csv),
-            ("Extract  →  GeoJSON", C["btn_geo"],  self._geo),
+            ("Extract →  CSV",     C["btn_csv"],  self._csv),
+            ("Extract →  GeoJSON", C["btn_geo"],  self._geo),
             ("Dump  --raw",          C["btn_raw"],  self._raw),
             ("--version",            C["btn_inf"],  self._ver),
             ("--help",               C["btn_inf"],  self._hlp),
@@ -123,7 +123,7 @@ class App:
                         style="V.TCheckbutton").pack(anchor="w",pady=1)
         self._div(left)
 
-        # File output
+        # Output file
         self._lbl(left,"Output file")
         ttk.Checkbutton(left, text="Save to file",
                         variable=self.save_file, style="V.TCheckbutton",
@@ -138,12 +138,12 @@ class App:
         self.disp_var.trace_add("write", self._sync_out)
         self.btn_out = self._btn(of,"…",self._brw_out,w=3,state=tk.DISABLED)
         self.btn_out.pack(side=tk.LEFT,padx=(4,0))
-        self.lbl_fmt = tk.Label(left, text="Active format: CSV  (.csv)",
+        self.lbl_fmt = tk.Label(left, text="Active format : CSV  (.csv)",
                                  bg=C["panel"], fg=C["accent"],
                                  font=("",9), anchor="w")
         self.lbl_fmt.pack(fill=tk.X,pady=(2,0))
 
-        # Bottom
+        # Bas
         tk.Frame(left, bg=C["panel"]).pack(fill=tk.BOTH, expand=True)
         btm = tk.Frame(left, bg=C["panel"]); btm.pack(fill=tk.X,pady=(6,0))
         self._btn(btm,"Clear console",self._clr,bg=C["btn_clr"]
@@ -154,7 +154,7 @@ class App:
         # Console
         right = tk.Frame(pw, bg=C["bg"]); pw.add(right, minsize=500)
 
-        # Title line + status
+        # Ligne titre + statut
         hd = tk.Frame(right, bg=C["bg"]); hd.pack(fill=tk.X,padx=4,pady=(4,2))
         tk.Label(hd, text="Console", bg=C["bg"],
                  fg=C["text"], font=("",11,"bold")).pack(side=tk.LEFT)
@@ -162,7 +162,7 @@ class App:
                                 fg=C["muted"], font=("",9))
         self.lbl_st.pack(side=tk.RIGHT)
 
-        # Progress bar
+        # Barre de progression
         prg = tk.Frame(right, bg=C["bg"]); prg.pack(fill=tk.X,padx=4,pady=(0,3))
         s2 = ttk.Style()
         s2.configure("Violet.Horizontal.TProgressbar",
@@ -177,7 +177,7 @@ class App:
         self.pb.pack(fill=tk.X, side=tk.LEFT, expand=True)
         self.pb["value"] = 0
 
-        # Progress label + time
+        # Label progression + temps
         self.lbl_prg = tk.Label(prg, text="", bg=C["bg"],
                                  fg=C["muted"], font=("",9),
                                  width=22, anchor="e")
@@ -215,17 +215,17 @@ class App:
         if w: b.config(width=w)
         return b
 
-    # ── file output ──────────────────────────────────────────────────────────
+    # ── sortie fichier ────────────────────────────────────────────────────────
     def _set_mode(self, mode):
         self._mode = mode
         if mode == "geojson":
             self.disp_var.set(self.geo_var.get())
             self.lbl_fmt.config(
-                text="Active format: GeoJSON  (.geojson)", fg=C["success"])
+                text="Active format : GeoJSON  (.geojson)", fg=C["success"])
         else:
             self.disp_var.set(self.csv_var.get())
             self.lbl_fmt.config(
-                text="Active format: CSV  (.csv)", fg=C["accent"])
+                text="Active format : CSV  (.csv)", fg=C["accent"])
 
     def _sync_out(self, *_):
         v = self.disp_var.get()
@@ -238,10 +238,10 @@ class App:
 
     def _brw_out(self):
         if self._mode == "geojson":
-            ext=".geojson"; types=[("GeoJSON","*.geojson"),("All","*")]
+            ext=".geojson"; types=[("GeoJSON","*.geojson"),("Tous","*")]
             ini=self.geo_var.get() or "export.geojson"
         else:
-            ext=".csv"; types=[("CSV","*.csv"),("All","*")]
+            ext=".csv"; types=[("CSV","*.csv"),("Tous","*")]
             ini=self.csv_var.get() or "rapport.csv"
         p = filedialog.asksaveasfilename(title="Output file",
             defaultextension=ext, initialfile=os.path.basename(ini),
@@ -250,7 +250,7 @@ class App:
 
     # ── navigation ───────────────────────────────────────────────────────────
     def _brw_bin(self):
-        types=[("Executables","*.exe"),("All","*")] if IS_WIN \
+        types=[("Executables","*.exe"),("Tous","*")] if IS_WIN \
               else [("All files","*")]
         p = filedialog.askopenfilename(title="Select dm_extract",
                                        filetypes=types)
@@ -281,7 +281,7 @@ class App:
                                text=True,timeout=5)
             ver=(r.stdout or r.stderr).strip()
             self.lbl_bin.config(text=f"✓ {ver}", fg=C["success"])
-            self._cw(f"Binary: {bp}\nVersion: {ver}\n\n","info")
+            self._cw(f"Binaire : {bp}\nVersion : {ver}\n\n","info")
         except Exception:
             self.lbl_bin.config(text="✗ Execution error", fg=C["error"])
 
@@ -293,12 +293,12 @@ class App:
             n = len([f for f in os.listdir(d)
                      if f.lower().endswith((".jpg",".jpeg"))])
             self.lbl_img.config(
-                text=f"{n} JPEG image{'s' if n>1 else ''}",
+                text=f"{n} image{'s' if n>1 else ''} JPEG",
                 fg=C["success"] if n>0 else C["warning"])
         except Exception:
             self.lbl_img.config(text="Read error", fg=C["error"])
 
-    # ── commandes ────────────────────────────────────────────────────────────
+    # ── Commands ────────────────────────────────────────────────────────────
     def _csv(self): self._set_mode("csv");     self._run("csv")
     def _geo(self): self._set_mode("geojson"); self._run("geojson")
     def _raw(self): self._set_mode("raw");     self._run("raw")
@@ -307,20 +307,20 @@ class App:
 
     def _get_imgs(self):
         d = self.dir_var.get()
-        if not d: messagebox.showerror("Error","No directory selected."); return None
+        if not d: messagebox.showerror("Erreur","Aucun répertoire."); return None
         if not os.path.isdir(d):
-            messagebox.showerror("Error",f"Not found:\n{d}"); return None
+            messagebox.showerror("Erreur",f"not found:\n{d}"); return None
         imgs = sorted([os.path.join(d,f) for f in os.listdir(d)
                        if f.lower().endswith((".jpg",".jpeg"))])
         if not imgs:
-            messagebox.showwarning("Warning",f"No JPEG in:\n{d}")
+            messagebox.showwarning("Attention",f"No JPEG in :\n{d}")
             return None
         return imgs
 
     def _build_cmd(self, mode):
         bp = self.bin_var.get()
         if not bp or not os.path.isfile(bp):
-            messagebox.showerror("Error","dm_extract binary not found.")
+            messagebox.showerror("Erreur","dm_extract binary not found.")
             return None
         if mode in ("version","help"): return [bp, f"--{mode}"]
         imgs = self._get_imgs()
@@ -339,13 +339,13 @@ class App:
                 if out and out.lower().endswith(".csv"):
                     out = str(Path(out).with_suffix(".geojson"))
                     self.geo_var.set(out); self.disp_var.set(out)
-                    self._cw(f"Info: extension corrected → {out}\n","warning")
+                    self._cw(f"Info : extension corrected → {out}\n","warning")
             else:
                 out = self.csv_var.get()
                 if out and out.lower().endswith(".geojson"):
                     out = str(Path(out).with_suffix(".csv"))
                     self.csv_var.set(out); self.disp_var.set(out)
-                    self._cw(f"Info: extension corrected → {out}\n","warning")
+                    self._cw(f"Info : extension corrected → {out}\n","warning")
             if out: cmd += ["-o", out]
 
         cmd += imgs
@@ -353,7 +353,7 @@ class App:
 
     def _run(self, mode):
         if self._running:
-            messagebox.showwarning("In progress","Command already running."); return
+            messagebox.showwarning("Running","Command already running."); return
         cmd = self._build_cmd(mode)
         if not cmd: return
 
@@ -366,7 +366,7 @@ class App:
         self._running = True
         self._start_t = time.time()
         self._n_images = len(cmd) - cmd.index(cmd[-1]) if mode not in ("version","help") else 0
-        # Count images in command (everything that is not an option)
+        # Counting the images in the command (anything that is not an option)
         self._n_images = sum(1 for a in cmd[1:] if not a.startswith("-")
                              and a.lower().endswith((".jpg",".jpeg")))
         self.pb.config(mode="determinate", maximum=max(self._n_images,1))
@@ -388,7 +388,7 @@ class App:
             t1.start(); t2.start(); t1.join(); t2.join(); p.wait()
             self._q.put(("__done__", p.returncode))
         except FileNotFoundError:
-            self._q.put(("error", f"Binary not found: {cmd[0]}"))
+            self._q.put(("error", f"Binary not found : {cmd[0]}"))
             self._q.put(("__done__", -1))
         except Exception as e:
             self._q.put(("error", str(e))); self._q.put(("__done__", -1))
@@ -407,13 +407,13 @@ class App:
 
                     # Statut + timing
                     if rc == 0:
-                        self.lbl_st.config(text="✓ Success (0)", fg=C["success"])
+                        self.lbl_st.config(text="✓ Success (0", fg=C["success"])
                     elif rc == 1:
-                        self.lbl_st.config(text="⚠ Partial (1)", fg=C["warning"])
+                        self.lbl_st.config(text="⚠ 	Partial (1)", fg=C["warning"])
                     else:
-                        self.lbl_st.config(text=f"✗ Error ({rc})", fg=C["error"])
+                        self.lbl_st.config(text=f"✗ Error  ({rc})", fg=C["error"])
 
-                    # Label progression final
+                    # Label final progress
                     if n > 0:
                         rate = n / elapsed if elapsed > 0 else 0
                         self.lbl_prg.config(
@@ -424,17 +424,17 @@ class App:
 
                     # Résumé en console
                     tag_rc = "info" if rc==0 else "warning" if rc==1 else "error"
-                    self._cw(f"\n→ Exit code: {rc}\n", tag_rc)
+                    self._cw(f"\n→ Exit code : {rc}\n", tag_rc)
                     if n > 0:
                         rate = n / elapsed if elapsed > 0 else 0
                         self._cw(
-                            f"⏱  {n} image{'s' if n>1 else ''} processed"
+                            f"⏱  {n} image{'s' if n>1 else ''} processed{'s' if n>1 else ''}"
                             f" en {elapsed:.2f} s"
                             f"  ({rate:.1f} img/s)\n",
                             "info" if rc==0 else "warning")
 
                 elif data is not None:
-                    # Parse [N/M] in stderr to update progress bar
+                    # Parser [N/M] dans stderr pour mettre à jour la barre
                     if tag == "stderr":
                         m = re.match(r"^\[(\d+)/(\d+)\]", data)
                         if m:
@@ -442,7 +442,7 @@ class App:
                             self.pb.config(maximum=tot)
                             self.pb["value"] = cur
                             elapsed = time.time() - self._start_t
-                            # ETA estimation
+                            # Estimation temps restant
                             if cur > 0 and elapsed > 0:
                                 eta = (tot - cur) * elapsed / cur
                                 self.lbl_prg.config(
@@ -472,7 +472,7 @@ class App:
         self.lbl_prg.config(text="")
 
     def _exit(self):
-        if messagebox.askokcancel("Exit","Exit dm_extract GUI?",
+        if messagebox.askokcancel("Exit ","Exit dm_extract GUI ?",
                                    parent=self.root):
             self.root.destroy()
 
@@ -493,3 +493,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
