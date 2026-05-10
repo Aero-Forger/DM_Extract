@@ -10,141 +10,107 @@ Each extractor handles GPS, orientation, calibrated focal length, and timestamp 
 
 ### DJI
 
-Detected via `Make = DJI` or `Make = Hasselblad` with `drone-dji:` XMP namespace.
+*Detection: XMP `drone-dji:` · Make = `DJI` or `Hasselblad`*
 
-| Model | Sensor | Notes |
-|---|---|---|
-| Mavic 2 Pro | 1" (Hasselblad L1D-20c) | FC2204 |
-| Mavic 3 / 3 Pro | 4/3" (Hasselblad L2D-20c) | |
-| Mavic Air 2 | 1/2" | FC3411 |
-| Mini 3 Pro | 1/1.3" | FC7303 |
-| Phantom 4 RTK / Pro v2 | 1" | FC6310R, P4R |
-| Matrice M30 | 1/2" wide | |
-| Matrice M30T | 1/2" wide + zoom | |
-| Matrice M600 + Zenmuse X5 | MFT 17.3 mm | |
-| Matrice M600 + Zenmuse X5S | MFT 17.4 mm | |
-| Zenmuse X5R | MFT 17.3 mm | |
-| Zenmuse X7 | Super35 23.5 mm | |
-| Zenmuse P1 | Full-frame 35 mm | FC8482 |
-| Inspire / XT2 / FC3682 | — | GPS parsed from `exif:` XMP namespace |
+| Model / series            | Notes                                    | Features                                         |
+| ------------------------- | ---------------------------------------- | ------------------------------------------------ |
+| Matrice 300 RTK / 350 RTK | Zenmuse H20T · H20 — WideCamera          | RTK · LRF · calibration · orientation · full GPS |
+| Matrice 30T / 30          | WideCamera 4.4mm · ZoomCamera 21mm       | RTK · LRF · calibration · orientation · full GPS |
+| Phantom 4 RTK / Pro       | FC6310R · P4R — 1" sensor                | RTK · calibration · orientation · full GPS       |
+| Mavic 3 / 3 Pro           | Hasselblad L2D-20c — 4/3" sensor         | calibration · orientation · full GPS             |
+| Mavic 2 Pro               | FC2204 · Hasselblad L1D-20c — 1"         | calibration · orientation · full GPS             |
+| Mavic Air 2               | FC3411 — 1/2" sensor                     | calibration · orientation · full GPS             |
+| Mini 3 Pro                | FC7303 — 1/1.3" sensor                   | calibration · orientation · full GPS             |
+| Zenmuse P1                | FC8482 — full-frame 45 MP, f35mm         | RTK · calibration · orientation · full GPS       |
+| Zenmuse X5 / X5S / X5R    | MFT sensor, focal length from EXIF       | calibration · orientation · full GPS             |
+| Zenmuse X7                | Super 35, interchangeable DL lens        | calibration · orientation · full GPS             |
+| DJI XT2 / FC3682          | Sexagesimal GPS format (exif: namespace) | orientation · full GPS                           |
+| Other DJI models          | Any Make=DJI or XMP drone-dji:           | orientation · full GPS · identification          |
 
-RTK solution quality, GPS accuracy (RtkStdLat/Lon/Hgt), and relative/absolute altitude are all extracted.
+>  Models without a registry entry fall back to 35mm_approx calibration (score 0.40). Registry entries yield score 0.80. XMP `CalibratedFocalLength` always takes priority (score 0.95).
 
----
-
-### Autel Robotics
-
-Detected via `Make = AUTEL` or model IDs `XL709`, `XT705`, `XB004`.
-
-| Model | Notes |
-|---|---|
-| Evo II | |
-| X-Star | |
-| Evo II Pro / Enterprise | XL709, XT705, XB004 |
-
-> **Note:** Autel uses the Pix4D pitch convention (0° = nadir, 90° = horizontal), which differs from DJI. This is flagged in the output metadata.
-
----
+------
 
 ### Parrot
 
-Detected via `Make = Parrot`.
+*Detection: XMP `drone-parrot:` · Make = `PARROT`*
 
-| Model | Notes |
-|---|---|
-| ANAFI | Single-axis gimbal — camera angles copied to gimbal fields |
-| ANAFI Ai | |
+| Model / series      | Notes                                    | Features                                |
+| ------------------- | ---------------------------------------- | --------------------------------------- |
+| ANAFI               | 1/2.4" sensor, single-axis gimbal (tilt) | orientation · full GPS · identification |
+| ANAFI Ai            | 4G, omnidirectional obstacle avoidance   | orientation · full GPS · identification |
+| ANAFI USA / Thermal | Government / thermal variants            | orientation · full GPS · identification |
 
----
+>  No calibration registry, no RTK. Single-axis gimbal: `camera_pitch` → `gimbal_pitch` when `gimbal_pitch` is absent.
 
-### senseFly (Parrot Professional)
+------
 
-Detected via Pix4D-style `Description:` XMP namespace.
+### senseFly
 
-| Model | Notes |
-|---|---|
-| eBee | Fixed-wing mapping drone |
-| Aeria X | Fixed-wing — camera angles propagated to flight angles |
+*Detection: XMP `sensefly:` · Make = `SENSEFLY` · `Description:` namespace (Pix4D)*
 
----
+| Model / series     | Notes                           | Features                                      |
+| ------------------ | ------------------------------- | --------------------------------------------- |
+| eBee X / eBee Plus | Fixed-wing, PPK/RTK, Pix4D tags | RTK · orientation · full GPS · identification |
+| eBee Classic / SQ  | Fixed-wing, standard GPS        | orientation · full GPS · identification       |
+| Aeria X            | Multi-sensor platform           | orientation · full GPS · identification       |
+
+>  XMP tags under `Description:` namespace (Pix4D style). `FlightUUID` extracted. No calibration registry.
+
+------
 
 ### Skydio
 
-Detected via `skydio:` XMP prefix, or tags `CaptureUtime`, `VehiclePositionNED`, `CameraPositionNED`.
+*Detection: XMP `skydio:` · `vehiclepositionned` (detected without EXIF Make)*
 
-| Model | Sensor | Notes |
-|---|---|---|
-| Skydio 2 | 1/3.8" IMX577, 3.7 mm | Firmware quirk: `ExifImageWidth` may contain normalisation base (320 px) instead of actual resolution (4056 px) — corrected automatically |
-| Skydio 2+ | 1/3.8" IMX577, 3.7 mm | Includes `[bracketed]` model tag variant |
-| X10 VT300-Z 13 mm | 8000 × 6000 | 35 mm equiv., sq. pixels |
-| X10 VT300-Z 50 mm | 9250 × 6878 | 9.8 mm focal length |
+| Model / series | Notes                                     | Features                             |
+| -------------- | ----------------------------------------- | ------------------------------------ |
+| Skydio 2       | Model=`"2"` · Sony IMX577, 1/3.8", f3.7mm | calibration · orientation · full GPS |
+| Skydio 2+      | Model=`"2+"` or `"[2+]"` · same sensor    | calibration · orientation · full GPS |
+| Skydio X10     | VT300-Z 13mm · VT300-Z 50mm               | calibration · orientation · full GPS |
 
-UTC timestamp is read from `xmp:CreateDate` (always written with `Z` suffix by Skydio firmware). `CaptureUtime` is a flight-relative counter (µs since boot) and is **not** used as a Unix timestamp.
+>  Built-in focal length sanity check (pre-2021 firmware stores normalized `CalibratedFocalLengthX`). Auto-corrected against actual `image_width`.
 
----
+------
 
-### Yuneec / Xiro
+### Autel Robotics
 
-Detected via `Make = Yuneec` or model prefixes `CGO2`, `CGO3`, `CGO4`, `XPLORER`, `UG3300`, `TYPHOON`, `H520`, `H850`.
+*Detection: XMP `drone-autel:` · Make = `AUTEL`*
 
-| Model | Notes |
-|---|---|
-| Typhoon H | |
-| Q500 | |
-| H520 | |
-| H850 | |
-| Xiro Explorer | Xiro brand, same extractor |
+| Model / series          | Notes                          | Features                                |
+| ----------------------- | ------------------------------ | --------------------------------------- |
+| EVO II / EVO II Pro     | 8K, 1" sensor                  | orientation · full GPS · identification |
+| EVO II Dual / Rugged    | Binocular, ruggedized variants | orientation · full GPS · identification |
+| X-Star / X-Star Premium | Legacy lineup                  | full GPS · identification               |
 
----
+>  XMP `drone-autel:` present only on some firmware versions. No calibration registry, no RTK.
+
+------
+
+### Yuneec
+
+*Detection: Make = `YUNEEC` · Make = `XIRO` · model contains `CGO` / `TYPHOON` / `H520`*
+
+| Model / series     | Notes                                 | Features       |
+| ------------------ | ------------------------------------- | -------------- |
+| Typhoon H / H Plus | CGO3+, hexacopter                     | identification |
+| H520 / H520E       | Professional, interchangeable payload | identification |
+| Q500 / Q500+       | CGO2 / CGO3                           | identification |
+| Xiro Xplorer       | Make=`XIRO` or `XPLORER` in model     | identification |
+
+>  Minimal extractor: camera family identification + basic calibration. No known proprietary XMP namespace, no RTK, no structured orientation.
+
+------
 
 ### Xiaomi / FIMI
 
-Detected via `Make = FIMI` or model prefixes `YTXJ`, `FIMI`, `MJX`.
+*Detection: Make = `XIAOMI` · Make = `BJ_XIAOMI` · model contains `YTXJ` / `FIMI` / `MJX`*
 
-| Model | Notes |
-|---|---|
-| FIMI X8 SE | |
-| FIMI X8 Mini | |
+| Model / series          | Notes                       | Features                  |
+| ----------------------- | --------------------------- | ------------------------- |
+| FIMI X8 SE / X8 SE 2022 | `YTXJ` in EXIF model tag    | full GPS · identification |
+| FIMI X8 Mini            | 250g class, `FIMI` in model | full GPS · identification |
+| MJX Bugs series         | `MJX` in model              | identification            |
 
----
+>  Minimal extractor: identification + basic calibration. No proprietary XMP namespace, no RTK, no structured orientation.
 
-## Fallback Extractor
-
-Any drone not matched by the extractors above falls back to a generic extractor that reads:
-
-- Standard EXIF GPS (latitude, longitude, altitude)
-- `DateTimeOriginal` / `DateTime` timestamp
-- Make, Model, focal length
-
-No manufacturer-specific fields (relative altitude, gimbal angles, RTK) are extracted in fallback mode.
-
----
-
-## Calibration Registry
-
-The following models have a built-in calibration entry used to validate or compute the calibrated focal length in pixels when XMP data is absent or inconsistent.
-
-| Model key | Image source | Focal (mm) | Sensor width (mm) | Resolution |
-|---|---|---|---|---|
-| M30T | WideCamera | 4.5 | 6.297 | 3840 × 2160 |
-| M30 | WideCamera | 4.5 | 6.297 | 3840 × 2160 |
-| M30T | ZoomCamera | — | — | median zoom |
-| Mavic 3 | WideCamera | 12.3 | 17.3 | — |
-| FC6310R (Phantom 4 RTK) | * | 8.8 | 13.2 | — |
-| P4R | * | alias for FC6310R | | |
-| FC2204 (Mavic 2 Pro) | * | 10.3 | 13.2 | — |
-| FC3411 (Mavic Air 2) | * | 4.5 | 6.3 | — |
-| FC8482 (Zenmuse P1) | * | 35.0 | 35.9 | — |
-| M600 + X5 | * | — | 17.3 | 4608 × 3456 |
-| M600 + X5S | * | — | 17.4 | 5280 × 3956 |
-| X5S | * | — | 17.4 | 5280 × 3956 |
-| X5R | * | — | 17.3 | 4608 × 3456 |
-| X7 | * | — | 23.5 | 6016 × 4008 |
-| FC7303 (Mini 3 Pro) | * | 6.7 | 9.4 | — |
-| Skydio 2 | * | 3.7 | 4.78 | 4056 × 3040 |
-| Skydio 2+ | * | 3.7 | 4.78 | 4056 × 3040 |
-| Skydio 2+ `[…]` variant | * | 3.7 | 4.78 | 4056 × 3040 |
-| X10 VT300-Z 13 mm | * | 35.0 eq. | 6.3683 | 8000 × 6000 |
-| X10 VT300-Z 50 mm | * | 9.8 | 7.175 | 9250 × 6878 |
-
-> `*` matches any `ImageSource` value. Entries with focal length = 0 rely on the EXIF `FocalLength` tag (variable-focal-length or interchangeable-lens systems).
