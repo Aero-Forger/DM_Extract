@@ -20,10 +20,43 @@ It produces structured, ready-to-use output in multiple formats — designed for
 
 ## Usage
 
+### Syntaxe
+
+```bash
+dm_extract [options] FILE [FILE ...]
+```
+
+At least one file must be provided. Wildcards are accepted.
+
+## Options
+
+| Option    | Forme longue    | Description                                               |
+| --------- | --------------- | --------------------------------------------------------- |
+| `-o FILE` | `--output FILE` | Output file. Default: stdout                              |
+| `-g`      | `--geojson`     | GeoJSON output format. Default : CSV                      |
+| `-n`      | `--no-header`   | Omit the header line CSV                                  |
+| `-r`      | `--raw`         | Diagnostic mode: raw EXIF/XMP dump + structured summary   |
+| `-q`      | `--quiet`       | Delete progress messages on stderr                        |
+| `-V`      | `--version`     | Show version and exit                                     |
+| `-h`      | `--help`        | Show help and exit                                        |
+
+------
+###  Exit codes
+
+/ Code / Meaning |
+| ---- | ------------------------------------------------------------ |
+|  '0` | Success — all files have been processed                      |
+|  `1` | At least one file in error (read, format not recognized)     |
+|  '2` | Arguments error (unknown option, inaccessible output file)   |
+
+
 ### Single file
 
 ```bash
-dm_extract image.jpg
+# Linux / macOS
+dm_extract DJI_0001.JPG
+# Windows
+dm_extract.exe DJI_0001.JPG
 ```
 See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) for more details
 
