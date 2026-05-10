@@ -80,7 +80,7 @@ See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) 
 
 ## Supported drones:
 
-7 brands detected automatically: **DJI**, **Parrot**, **senseFly**, **Skydio**, **Autel Robotics**, **Yuneec**, **Xiaomi/FIMI**.
+7 brands detected automatically: **DJI**, **Parrot**, **senseFly**, **Skydio**, **Autel Robotics**, **Yuneec**, **Xiaomi**.
 
 [Drones](https://github.com/Aero-Forger/DM_Extract/blob/main/SUPPORTED_DRONES.md)
 
