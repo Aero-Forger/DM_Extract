@@ -293,7 +293,7 @@ class App:
             n = len([f for f in os.listdir(d)
                      if f.lower().endswith((".jpg",".jpeg"))])
             self.lbl_img.config(
-                text=f"{n} JPEG image{\'s\' if n>1 else \'\'}",
+                text=f"{n} JPEG image{'s' if n>1 else ''}",
                 fg=C["success"] if n>0 else C["warning"])
         except Exception:
             self.lbl_img.config(text="Read error", fg=C["error"])
@@ -428,7 +428,7 @@ class App:
                     if n > 0:
                         rate = n / elapsed if elapsed > 0 else 0
                         self._cw(
-                            f"⏱  {n} image{\'s\' if n>1 else \'\'} processed"
+                            f"⏱  {n} image{'s' if n>1 else ''} processed"
                             f" en {elapsed:.2f} s"
                             f"  ({rate:.1f} img/s)\n",
                             "info" if rc==0 else "warning")
@@ -493,4 +493,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
