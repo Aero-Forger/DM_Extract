@@ -54,7 +54,7 @@ At least one file must be provided. Wildcards are accepted.
 
 ```bash
 # Linux / macOS
-dm_extract DJI_0001.JPG
+./dm_extract DJI_0001.JPG
 
 # Windows
 dm_extract.exe DJI_0001.JPG
