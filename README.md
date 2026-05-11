@@ -1,6 +1,8 @@
 # dm_extract ( *drone metadata extract* ) ![English](https://flagcdn.com/w40/gb.png)
 ![Langage](https://img.shields.io/badge/langage-C-blue.svg)
 
+**English** | [Français](docs/README.fr.md)
+
 > Extract drone image metadata from the command line.
 
 `dm_extract` is a CLI tool for extracting EXIF, XMP and GPS metadata from drone JPG images.  
