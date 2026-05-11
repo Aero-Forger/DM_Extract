@@ -11,9 +11,7 @@ Il produit une sortie structurée et prête à l'emploi dans plusieurs formats �
 
 ## Fonctionnalités
 
-* 📷 Analyse les métadonnées EXIF / XMP des images JPEG de drones 
-  
-  (fichier unique ou par lot)
+* 📷 Analyse les métadonnées EXIF / XMP des images JPEG de drones  (fichier unique ou par lot)
 
 * 📍 Extrait les coordonnées GPS, altitude, angles de nacelle et focale calibrée
 
