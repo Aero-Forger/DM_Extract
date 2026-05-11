@@ -74,6 +74,7 @@ The static binary use is <mark>preferred</mark> to be able to make scripts or to
 The GUI does not allow it.
 
 :warning: the Python GUI is a simple test tool that **is not part of the code** of `dm_extract`
+
 ---
 ### Output:
 
