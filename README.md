@@ -48,9 +48,9 @@ At least one file must be provided. Wildcards are accepted.
 
 | Code |                             Meaning                          |
 | ---- | ------------------------------------------------------------ |
-|  '0` | Success — all files have been processed                      |
+|  `0` | Success — all files have been processed                      |
 |  `1` | At least one file in error (read, format not recognized)     |
-|  '2` | Arguments error (unknown option, inaccessible output file)   |
+|  `2` | Arguments error (unknown option, inaccessible output file)   |
 
 ##### Single file
 
@@ -70,9 +70,10 @@ See [binaries](https://github.com/Aero-Forger/DM_Extract/blob/main/binaries.md) 
 [GUI](https://github.com/Aero-Forger/DM_Extract/blob/main/dm_extract_gui_en.py)
 
 Quick python tool to graphically test dm_extract.  
-The static binary use is preferred to be able to make scripts or to be integrate into an exernal workflow.   
+The static binary use is <mark>preferred</mark> to be able to make scripts or to be integrate into an exernal workflow.   
 The GUI does not allow it.
 
+:warning: the Python GUI is a simple test tool that **is not part of the code** of `dm_extract`
 ---
 ### Output:
 
