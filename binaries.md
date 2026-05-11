@@ -10,6 +10,7 @@
 
 ### USAGE
 
+**Linux / Mac**
 ```bash
 chmod +x dm_extract
  ./dm_extract photo.jpg
@@ -19,13 +20,17 @@ chmod +x dm_extract
  ./dm_extract --help
 ```
 
+**Windows**
+```bash
+dm_extract.exe --raw \Temp\tests\*.jpg
+```
 ### OUTPUTS
 
-CSV (default) : 33 columns — GPS, orientation, calibration, LRF, RTK
- GeoJSON : FeatureCollection, one Feature per GPS‑valid image
+CSV (default) : 33 columns — GPS, orientation, calibration, LRF, RTK  
+GeoJSON : FeatureCollection, one Feature per GPS‑valid image  
 
 ### EXIT CODES
 
-0 Success  
-1 At least one file in error  
-2 Argument error  
+`0` Success  
+`1` At least one file in error  
+`2` Argument error  
