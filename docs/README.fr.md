@@ -100,7 +100,7 @@ L'interface graphique ne le permet pas.
 - Seuls les fichiers **JPEG** (`.jpg`, `.JPG`) sont pris en charge. Les formats RAW (DNG, CR2, NEF) ne le sont pas encore.
 - Le traitement est **séquentiel** (un fichier à la fois) avec **-- raw**
 - En mode GeoJSON, les images sans GPS valide sont exclues sans message d'avertissement (utilisez `--raw` pour diagnostiquer).
-- Le parseur ne lit que les 512 premiers Ko de chaque fichier JPEG pour localiser les blocs EXIF et XMP — pas le fichier entier (qui peut peser 20 à 50 Mo pour une photo drone). En pratique, ces blocs de métadonnées se trouvent toujours dans les 128 premiers Ko ; la limite de 512 Ko est une marge de sécurité conservative.
+- Le parseur ne lit que les 512 premiers Ko de chaque fichier JPEG pour localiser les blocs EXIF et XMP — pas le fichier entier (qui peut peser 20 à 50 Mo pour une photo drone). En pratique, ces blocs de métadonnées se trouvent toujours dans les 128 premiers Ko ; la limite de 512 Ko est une marge de sécurité confortable.
 
 ---
 
