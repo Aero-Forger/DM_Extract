@@ -44,9 +44,9 @@ At least one file must be provided. Wildcards are accepted.
 | `-V`      | `--version`     | Show version and exit                                     |
 | `-h`      | `--help`        | Show help and exit                                        |
 | -j N      | `--jobs N`      | Number of threads (2, 4, 6 or 8).                         |
-|                             | Default: automatic selection based on available RAM.      |
-|                             | Use -j 1 to force sequential mode.                        |
-|                             | Ignored with --raw (always sequential).                   |
+|                               Default: automatic selection based on available RAM.      |
+|                               Use -j 1 to force sequential mode.                        |
+|                               Ignored with --raw (always sequential).                   |
 
 #####  Exit codes
 
