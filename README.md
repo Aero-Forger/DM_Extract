@@ -90,9 +90,9 @@ The GUI does not allow it.
 ### Limitations
 
 - Only **JPEG** files (`.jpg`, `.JPG`) are supported. RAW formats (DNG, CR2, NEF) are not yet supported.
-- The maximum scan size per file is **512 KB** (the EXIF + XMP blocks of a drone fit in the first 128 KB).
 - The processing is **sequential** (one file at a time) only with **-- raw**
 - In GeoJSON mode, images without valid GPS are excluded without warning message (use '--raw` to diagnose).
+- The parser reads only the first 512 KB of each JPEG file to locate the EXIF and XMP blocks — not the entire file (which can be 20–50 MB for a drone photo). In practice, these metadata blocks are always found within the first 128 KB; the 512 KB limit is a conservative safety margin.
   
 ---
 
