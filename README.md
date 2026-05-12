@@ -45,7 +45,7 @@ At least one file must be provided. Wildcards are accepted.
 | `-V`      | `--version`     | Show version and exit                                     |
 | `-h`      | `--help`        | Show help and exit                                        |
 
-<u>Multithread options<\u>:
+***Multithread options***:
   - Default: automatic selection based on available RAM.      
   - Use -j 1 to force sequential mode.                        
   - Ignored with --raw (always sequential).                   
