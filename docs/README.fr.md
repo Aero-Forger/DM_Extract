@@ -46,8 +46,14 @@ Au moins un fichier doit être fourni. Les jokers sont acceptés.
 | `-n`      | `--no-header`   | Omet la ligne d'en-tête CSV                             |
 | `-r`      | `--raw`         | Mode diagnostic : dump EXIF/XMP brut + résumé structuré |
 | `-q`      | `--quiet`       | Supprime les messages de progression sur stderr         |
+| `-j N`    | `--jobs N`      | Nombre de threads (2, 4, 6 or 8).                       |
 | `-V`      | `--version`     | Affiche la version et quitte                            |
 | `-h`      | `--help`        | Affiche l'aide et quitte                                |
+
+***Options Multithread:***
+  - Par défaut : sélection automatique en fonction de la RAM disponible.
+  - Utilisez -j 1 pour forcer le mode séquentiel.
+  - Ignoré avec l'option --raw (toujours séquentiel).
 
 ##### Codes de sortie
 
