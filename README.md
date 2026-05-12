@@ -41,11 +41,11 @@ At least one file must be provided. Wildcards are accepted.
 | `-n`      | `--no-header`   | Omit the header line CSV                                  |
 | `-r`      | `--raw`         | Diagnostic mode: raw EXIF/XMP dump + structured summary   |
 | `-q`      | `--quiet`       | Delete progress messages on stderr                        |
+| `-j N`    | `--jobs N`      | Number of threads (2, 4, 6 or 8).                         |
 | `-V`      | `--version`     | Show version and exit                                     |
 | `-h`      | `--help`        | Show help and exit                                        |
-| `-j N`    | `--jobs N`      | Number of threads (2, 4, 6 or 8).                         |
 
-Multithread options:
+<u>Multithread options<\u>:
   - Default: automatic selection based on available RAM.      
   - Use -j 1 to force sequential mode.                        
   - Ignored with --raw (always sequential).                   
